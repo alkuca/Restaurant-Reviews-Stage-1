@@ -1,8 +1,23 @@
 let restaurants,
   neighborhoods,
-  cuisines
-var newMap
-var markers = []
+  cuisines;
+var newMap;
+var markers = [];
+
+(function() {
+    if (!('serviceWorker' in navigator)) {
+        console.log('Service Worker is not supported');
+        return;
+    }
+
+    navigator.serviceWorker.register('/serviceWorker.js')
+        .then(function() {
+            console.log('Service Worker Registered!');
+        })
+        .catch(function(error){
+            console.log('Service Worker Registration failed!: ', error)
+        });
+})();
 
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
